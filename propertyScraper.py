@@ -1,4 +1,4 @@
-import json
+import getPropertyImages
 import requests
 
 
@@ -37,3 +37,5 @@ for i in returnedProperties:
         allProperties.append(i)
     else:
         print("Removed entry from source: {0}".format(i['datasource_name']))
+
+print(getPropertyImages.getImageLinks(allProperties[0]['lister_url']))
