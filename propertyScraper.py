@@ -7,7 +7,7 @@ import os.path
 
 
 valid_websites = ["OnTheMarket.com"]
-listing_type = "buy"
+listing_type = "rent" # rent/buy
 place_name = "Cardiff"
 listings_per_page = 50
 page = 1
@@ -83,7 +83,8 @@ keysToRemove = ('construction_year', 'commission', 'datasource_name', 'img_heigh
                 'thumb_url', 'thumb_width', 'title', 'updated_in_days', 'updated_in_days_formatted',
                 'car_spaces', 'summary')
 
-for prop in allProperties:
+
+for n, prop in enumerate(allProperties):
     # Get image links
     prop["image_links"] = getPropertyImages.getImageLinks(prop['lister_url'])
 
@@ -98,7 +99,7 @@ for prop in allProperties:
         keywords.append(i.lstrip())
     prop["keywords"] = keywords
 
-    print("Downloading images for property {0}".format(prop["_id"]))
+    print("Downloading images for property {0} - {1}/{2}".format(prop["_id"], n, len(allProperties)))
     prop = downloadImages(prop)
     db.insertOneEntry(prop)
 
